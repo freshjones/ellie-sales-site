@@ -102,6 +102,18 @@ gulp.task('test', function (done) {
 });
 
 
+gulp.task('tdd', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js'
+  }, done).start();
+});
+
+
+gulp.task('js-watch', ['test','js'], function (done) {
+    browserSync.reload();
+    done();
+});
+
 // Default task that will be run
 // when no parameter is provided
 // to gulp
@@ -110,6 +122,6 @@ gulp.task('default', ['browsersync'],function () {
   gulp.watch(['./src/scss/**/*.scss'], ['css']);
   gulp.watch(['./public/index.html']).on('change', reload);
   gulp.watch(['./src/**/*.html'], ['templates']).on('change', reload);
-  gulp.watch(['./src/**/*.js'], ['js']).on('change', reload);
+  gulp.watch(['./src/**/*.js'], ['js-watch']);
 
 });
