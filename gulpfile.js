@@ -92,6 +92,12 @@ gulp.task('css', function ()
 
 gulp.task('vendor', ['js-vendor','css-vendor']);
 
+gulp.task('test', function (){
+
+  
+});
+
+
 // Default task that will be run
 // when no parameter is provided
 // to gulp
