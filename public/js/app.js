@@ -6,7 +6,7 @@
 		'angular-jwt', 
 		'ui.router',
 		'templates',
-		'factory.cognito',
+		'factory.signup',
 		'ngMessages',
 		'ngPassword'
 	])
@@ -56,11 +56,11 @@
 					
 					'main' : {
 						templateUrl:'templates/login.tpl.html',
-						controller:function($scope, cognito){
+						controller:function($scope, signupService){
 
 							$scope.save = function()
 							{
-								cognito.getHelloWorld().then(function(data){
+								signupService.getHelloWorld().then(function(data){
 
 									console.log(data);
 								});
@@ -80,7 +80,7 @@
 					
 					'main' : {
 						templateUrl:'templates/signup.tpl.html',
-						controller:function($scope, cognito){
+						controller:function($scope, signupService){
 
 							
 							$scope.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
@@ -90,7 +90,7 @@
 
 							$scope.attemptSignUp = function(data)
 							{	
-								cognito.signup(data).then(function(resp)
+								signupService.signup(data).then(function(resp)
 								{
 									console.log(resp);
 								});
@@ -110,7 +110,7 @@
 					
 					'main' : {
 						templateUrl:'templates/confirm.tpl.html',
-						controller:function($scope, cognito){
+						controller:function($scope, signupService){
 
 							$scope.submitDisabled = false;
 
@@ -118,7 +118,7 @@
 
 							$scope.attemptConfirmation = function(code)
 							{	
-								cognito.confirm(code).then(function(resp)
+								signupService.confirm(code).then(function(resp)
 								{
 									console.log(resp);
 								});
@@ -141,25 +141,10 @@
 
   'use strict';
 
-  function cognito($http)
+  function signupService($http)
   {
     
   		var service = {};
-
-    	service.getHelloWorld = function(lang, activity_path)
-    	{ 
-
-    		var url = '/auth/signup';
-
-        var promise = $http.get(url).then(function(response)
-        { 
-
-         	return response.data;
-        });
-
-        return promise;
-
-    	};
 
       service.confirm = function(data)
       { 
@@ -172,7 +157,7 @@
         });
 
         return promise;
-
+        
       };
 
       service.signup = function(data)
@@ -193,7 +178,156 @@
 
   }
 
-  angular.module('factory.cognito', [])
-  	.factory('cognito',cognito);
+  angular.module('factory.signup', [])
+  	.factory('signupService',signupService);
 
 })();
+(function() {
+
+  'use strict';
+
+  function UserService()
+  {
+
+    var Users = {};
+
+    var userList = [
+    {
+        id: '1',
+        name: 'Jane',
+        role: 'Designer',
+        location: 'New York',
+        twitter: 'gijane'
+    },
+    {
+        id: '2',
+        name: 'Bob',
+        role: 'Developer',
+        location: 'New York',
+        twitter: 'billybob'
+    },
+    {
+        id: '3',
+        name: 'Jim',
+        role: 'Developer',
+        location: 'Chicago',
+        twitter: 'jimbo'
+    },
+    {
+        id: '4',
+        name: 'Bill',
+        role: 'Designer',
+        location: 'LA',
+        twitter: 'dabill'
+    }
+    ];
+
+    Users.all = function() {
+      return userList;
+  };
+
+  Users.findById = function(id) {
+      // Returning a single user object as our test expects it to
+      return userList.find(function(user) {
+        return user.id === id;
+    });
+  };
+  
+  return Users;
+
+}
+
+angular.module('api.users', [])
+.factory('UserService',UserService);
+
+})();
+describe('Users factory', function() 
+{
+
+	var Users;
+
+	var userList = [
+	{
+		id: '1',
+		name: 'Jane',
+		role: 'Designer',
+		location: 'New York',
+		twitter: 'gijane'
+	},
+	{
+		id: '2',
+		name: 'Bob',
+		role: 'Developer',
+		location: 'New York',
+		twitter: 'billybob'
+	},
+	{
+		id: '3',
+		name: 'Jim',
+		role: 'Developer',
+		location: 'Chicago',
+		twitter: 'jimbo'
+	},
+	{
+		id: '4',
+		name: 'Bill',
+		role: 'Designer',
+		location: 'LA',
+		twitter: 'dabill'
+	}
+	];
+
+	var singleUser = {
+		id: '2',
+		name: 'Bob',
+		role: 'Developer',
+		location: 'New York',
+		twitter: 'billybob'
+	};
+
+	// Before each test load our api.users module
+	beforeEach(angular.mock.module('api.users'));
+
+	// Before each test set our injected Users factory (_Users_) to our local Users variable
+	beforeEach(inject(function(_UserService_) {
+		Users = _UserService_;
+	}));
+
+	// A simple test to verify the Users factory exists
+	it('should exist', function() {
+		expect(Users).toBeDefined();
+	});
+
+	// A set of tests for our Users.all() method
+	describe('.all()', function() {
+
+    	// A simple test to verify the method all exists
+    	it('should exist', function() {
+    		expect(Users.all).toBeDefined();
+    	});
+
+    	it('should return a hard-coded list of users', function() {
+    		expect(Users.all()).toEqual(userList);
+    	});
+
+    });
+
+	describe('.findById()', function() {
+
+  	  // A simple test to verify the method findById exists
+  	  it('should exist', function() {
+  	  	expect(Users.findById).toBeDefined();
+  	  });
+
+  	  it('should return one user object if it exists', function() {
+  	  	expect(Users.findById('2')).toEqual(singleUser);
+  	  });
+
+  	  it('should return undefined if the user cannot be found', function() {
+  	  	expect(Users.findById('ABC')).not.toBeDefined();
+  	  });
+
+  	});
+
+
+});

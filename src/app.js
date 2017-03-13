@@ -6,7 +6,7 @@
 		'angular-jwt', 
 		'ui.router',
 		'templates',
-		'factory.cognito',
+		'factory.signup',
 		'ngMessages',
 		'ngPassword'
 	])
@@ -56,11 +56,11 @@
 					
 					'main' : {
 						templateUrl:'templates/login.tpl.html',
-						controller:function($scope, cognito){
+						controller:function($scope, signupService){
 
 							$scope.save = function()
 							{
-								cognito.getHelloWorld().then(function(data){
+								signupService.getHelloWorld().then(function(data){
 
 									console.log(data);
 								});
@@ -80,7 +80,7 @@
 					
 					'main' : {
 						templateUrl:'templates/signup.tpl.html',
-						controller:function($scope, cognito){
+						controller:function($scope, signupService){
 
 							
 							$scope.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
@@ -90,7 +90,7 @@
 
 							$scope.attemptSignUp = function(data)
 							{	
-								cognito.signup(data).then(function(resp)
+								signupService.signup(data).then(function(resp)
 								{
 									console.log(resp);
 								});
@@ -110,7 +110,7 @@
 					
 					'main' : {
 						templateUrl:'templates/confirm.tpl.html',
-						controller:function($scope, cognito){
+						controller:function($scope, signupService){
 
 							$scope.submitDisabled = false;
 
@@ -118,7 +118,7 @@
 
 							$scope.attemptConfirmation = function(code)
 							{	
-								cognito.confirm(code).then(function(resp)
+								signupService.confirm(code).then(function(resp)
 								{
 									console.log(resp);
 								});

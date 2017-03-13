@@ -2,25 +2,10 @@
 
   'use strict';
 
-  function cognito($http)
+  function signupService($http)
   {
     
   		var service = {};
-
-    	service.getHelloWorld = function(lang, activity_path)
-    	{ 
-
-    		var url = '/auth/signup';
-
-        var promise = $http.get(url).then(function(response)
-        { 
-
-         	return response.data;
-        });
-
-        return promise;
-
-    	};
 
       service.confirm = function(data)
       { 
@@ -33,7 +18,7 @@
         });
 
         return promise;
-
+        
       };
 
       service.signup = function(data)
@@ -54,7 +39,7 @@
 
   }
 
-  angular.module('factory.cognito', [])
-  	.factory('cognito',cognito);
+  angular.module('factory.signup', [])
+  	.factory('signupService',signupService);
 
 })();

@@ -9,8 +9,10 @@ var postcss           = require('gulp-postcss');
 var cssnano           = require('cssnano');
 var postcssimport     = require('postcss-easy-import');
 
-var browserSync   = require('browser-sync').create();
-var reload        = browserSync.reload;
+var browserSync       = require('browser-sync').create();
+var reload            = browserSync.reload;
+
+var Server            = require('karma').Server;
 
 var processors = [];
 
@@ -92,9 +94,11 @@ gulp.task('css', function ()
 
 gulp.task('vendor', ['js-vendor','css-vendor']);
 
-gulp.task('test', function (){
-
-  
+gulp.task('test', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
 });
 
 
