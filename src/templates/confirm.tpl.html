@@ -1,0 +1,30 @@
+<div class="col col-8">
+	<h1 class="mb0">Check Your Email!</h1>
+	<p class="mt0">To complete the signup process, please enter the code from your verification email in the form field below.<br />
+	If you did not receive a confirmation code click <a class="bold fuchsia" ui-sref="resend-confirmation">here</a>.</p>
+	<form name="confirm" ng-submit="attemptConfirmation(code)" autocomplete="off" novalidate>
+		<div>
+			<label for="name">
+				Confirmation Code
+				<div ng-messages="confirm.code.$error" ng-if="confirm.code.$dirty" class="inline red">
+			    	<span ng-message="required">(Required)</span>
+			    	<span ng-message="pattern">(Must Be A Valid Code)</span>
+				</div>
+				<div class="inline green" ng-show="confirm.code.$valid">(OK)</div>
+			</label>
+			<input 
+				type="text" 
+				name="code" 
+				id="code" 
+				ng-model="code" 
+				ng-pattern="onlyNumbers" 
+				placeholder="Enter Confirmation Code" 
+				required />
+		</div>
+
+		<button 
+			type="submit" 
+			class="btn btn-primary not-rounded bg-fuchsia" 
+			ng-disabled="confirm.$invalid || submitDisabled"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Sign Up</button>
+	</form>
+</div>

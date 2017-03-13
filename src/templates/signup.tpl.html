@@ -1,0 +1,87 @@
+<div class="col col-8">
+	<h1 class="mb0">Create An Account</h1>
+	<p class="mt0">Already have an <span class="bold">ellie</span> account? <a class="fuchsia bold" ui-sref="signin">Sign In</a></p>
+	<form name="signup" ng-submit="attemptSignUp(user)" autocomplete="off" novalidate>
+		<div>
+			<label for="name">
+				Name
+				<div class="inline red" ng-if="signup.name.$dirty" ng-show='signup.name.$error.required'>(Required)</div>
+				<div class="inline green" ng-show="signup.name.$valid">(Good)</div>
+			</label>
+			<input 
+				type="text" 
+				name="name" 
+				id="name" 
+				ng-model="user.name" 
+				placeholder="Name" 
+				required />
+			
+		</div>
+
+		<div>
+			<label for="username">
+				Email Address
+				<div ng-messages="signup.username.$error" ng-if="signup.username.$dirty" class="inline red">
+			    	<span ng-message="required">(Required)</span>
+			    	<span ng-message="pattern">(Must Be A Valid Email)</span>
+				</div>
+				<div class="inline green" ng-show="signup.username.$valid">(Good)</div>
+			</label>
+			<input 
+				type="email" 
+				name="username"
+				id="username"
+				pattern="^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$" 
+				ng-model="user.username" 
+				placeholder="Email Address" 
+				required />
+		</div>
+
+
+		<div class="flex">
+			<div class="flex-auto mr1">
+				<label for="password">
+					Password
+					<div ng-messages="signup.password.$error" ng-if="signup.password.$dirty" class="inline red">
+			        	<span ng-message="required">(Required)</span>
+			       	 	<span ng-message="pattern">(Password is not strong enough)</span>
+			    	</div>
+			    	<div class="inline green" ng-show="signup.password.$valid">(Good)</div>
+				</label>
+				<input 
+					type="password" 
+					name="password" 
+					id="password" 
+					ng-pattern="passwordStrength" 
+					ng-model="user.password" 
+					placeholder="Enter a Password" 
+					required />
+			</div>
+
+			<div class="flex-auto">
+				<label for="password_confirm">
+					Confirm
+					<div ng-messages="signup.password_confirm.$error" ng-if="signup.password_confirm.$dirty" class="inline red">
+				        <span ng-message="required">(Required)</span>
+				        <span ng-message="passwordMatch">(Password does not match)</span>
+				    </div>
+				    <div class="inline green" ng-show="signup.password_confirm.$valid">(Good)</div>
+				</label>
+				<input 
+					type="password" 
+					name="password_confirm" 
+					id="password_confirm" 
+					ng-model="user.password_confirm" 
+					placeholder="Confirm Your Password" 
+					match-password="password" 
+					required />
+			</div>
+		</div>
+		
+
+		<button 
+			type="submit" 
+			class="btn btn-primary not-rounded bg-fuchsia" 
+			ng-disabled="signup.$invalid || submitDisabled"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Sign Up</button>
+	</form>
+</div>

@@ -1,0 +1,49 @@
+input, select, textarea
+{
+	font-family: inherit;
+  	font-size: inherit;
+  	font-weight:300;
+  	display: block;
+ 	width: 100%;
+	margin-bottom: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	box-sizing: border-box;
+}
+
+input[type=checkbox]
+{
+	width: auto;
+	height: auto;
+}
+
+input,select {
+  height: 2.5rem;
+  padding: .5rem;
+}
+
+input[type=submit],
+input[type=reset]
+{
+	width:auto;
+}
+
+textarea {
+  padding: .5rem;
+
+}
+
+label {
+  font-size: .875rem;
+  font-weight: 300;
+  display: block;
+  margin-bottom: .5rem;
+  text-transform:uppercase;
+  color:gray;
+  letter-spacing:0.05em;
+}
+
+.ng-dirty.ng-invalid
+{
+	border-color: #ff4136;
+}

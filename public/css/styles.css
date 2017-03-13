@@ -1,0 +1,89 @@
+/* line 1, /Users/floyd/ellie_sales/src/scss/partials/_basscss_extras.scss */
+.not-rounded {
+  border-radius: 0 !important;
+}
+
+/* line 6, /Users/floyd/ellie_sales/src/scss/partials/_basscss_extras.scss */
+.btn {
+  font-weight: 300;
+  box-shadow: none !important;
+}
+
+/* line 1, /Users/floyd/ellie_sales/src/scss/partials/_main.scss */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 7, /Users/floyd/ellie_sales/src/scss/partials/_main.scss */
+body {
+  font-family: 'Source Sans Pro';
+  font-weight: 300;
+}
+
+/* line 12, /Users/floyd/ellie_sales/src/scss/partials/_main.scss */
+html, h1, h2, h3, h4, h5, h6, button, label {
+  font-weight: 300;
+}
+
+/* line 17, /Users/floyd/ellie_sales/src/scss/partials/_main.scss */
+a {
+  color: black;
+}
+
+/* line 22, /Users/floyd/ellie_sales/src/scss/partials/_main.scss */
+strong, .bold {
+  font-weight: 400;
+}
+
+/* line 1, /Users/floyd/ellie_sales/src/scss/partials/_forms.scss */
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 300;
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+/* line 14, /Users/floyd/ellie_sales/src/scss/partials/_forms.scss */
+input[type=checkbox] {
+  width: auto;
+  height: auto;
+}
+
+/* line 20, /Users/floyd/ellie_sales/src/scss/partials/_forms.scss */
+input, select {
+  height: 2.5rem;
+  padding: .5rem;
+}
+
+/* line 25, /Users/floyd/ellie_sales/src/scss/partials/_forms.scss */
+input[type=submit],
+input[type=reset] {
+  width: auto;
+}
+
+/* line 31, /Users/floyd/ellie_sales/src/scss/partials/_forms.scss */
+textarea {
+  padding: .5rem;
+}
+
+/* line 36, /Users/floyd/ellie_sales/src/scss/partials/_forms.scss */
+label {
+  font-size: .875rem;
+  font-weight: 300;
+  display: block;
+  margin-bottom: .5rem;
+  text-transform: uppercase;
+  color: gray;
+  letter-spacing: 0.05em;
+}
+
+/* line 46, /Users/floyd/ellie_sales/src/scss/partials/_forms.scss */
+.ng-dirty.ng-invalid {
+  border-color: #ff4136;
+}
